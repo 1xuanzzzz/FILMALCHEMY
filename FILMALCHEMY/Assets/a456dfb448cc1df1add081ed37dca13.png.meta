@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7fcc9c8cd1a53c243a7cf40eb7b0a422
+guid: 6586eb0eaf1ae2d4aad3ea7f403f6e27
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9137117592129561275
-    second: DOTweenIcon_0
+      213: 4911634158564001751
+    second: a456dfb448cc1df1add081ed37dca13_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DOTweenIcon_0
+      name: a456dfb448cc1df1add081ed37dca13_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 91
-        height: 16
+        x: 0
+        y: 0
+        width: 1255
+        height: 427
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 54d1522e5ff623180800000000000000
-      internalID: -9137117592129561275
+      spriteID: 7d7c1e78e31a92440800000000000000
+      internalID: 4911634158564001751
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      DOTweenIcon_0: -9137117592129561275
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

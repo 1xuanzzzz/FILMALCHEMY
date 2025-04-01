@@ -1,64 +1,88 @@
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Core.Easing;
 
 public class DragObject : MonoBehaviour
 {
-    private Camera mainCamera;
-    private Vector3 offset;
-    private bool isDragging = false;
-    private Vector3 originalPosition; // 记录原始位置
+        private Camera mainCamera;
+        private Vector3 offset;
+        private Vector3 originalPosition;
+        private bool isDragging = false;
+        private bool isPlaced = false;
+        private bool isInSnapZone = false;
 
-    public Transform dropZone; // 目标区域（黑色背景）
-    public Transform correctPosition; // 目标吸附位置
-    public float radius;
+    public Transform correctPosition;          
+        public bool isCorrectObject = false;        
 
-    void Start()
-    {
-        mainCamera = Camera.main;
-        originalPosition = transform.position; // 记录初始位置
-    }
-
-    void OnMouseDown()
-    {
-        // 计算鼠标点击的偏移量
-        offset = transform.position - GetMouseWorldPosition();
-        isDragging = true;
-        Debug.Log("On Mouse Down");
-    }
-
-    void OnMouseDrag()
-    {
-        if (isDragging)
+        void Start()
         {
-            transform.position = GetMouseWorldPosition() + offset;
+            mainCamera = Camera.main;
+            originalPosition = transform.position;
         }
-        Debug.Log("On Mouse Drag");
 
-    }
-
-    void OnMouseUp()
-    {
-        isDragging = false;
-
-        // 检测是否在目标区域内
-        if (Vector3.Distance(transform.position, dropZone.position) < 1.5f) // 允许一定误差
+        void OnMouseDown()
         {
-            // 吸附到正确位置
+            if (isPlaced) return;
+
+            offset = transform.position - GetMouseWorldPosition();
+            isDragging = true;
+        }
+
+        void OnMouseDrag()
+        {
+            if (isDragging && !isPlaced)
+            {
+                transform.position = GetMouseWorldPosition() + offset;
+            }
+        }
+
+        void OnMouseUp()
+        {
+        if (isInSnapZone && isCorrectObject)
+        {
             transform.DOMove(correctPosition.position, 0.5f).SetEase(Ease.OutQuad);
+            isPlaced = true;
+            GameManager.Instance.RegisterCorrectPlacement();
         }
         else
         {
-            // 返回原始位置
-            transform.DOMove(originalPosition, 0.5f).SetEase(Ease.OutQuad);
+            ReturnToOrigin();
         }
-        Debug.Log("On Mouse Up");
-
     }
 
-    Vector3 GetMouseWorldPosition()
+        void ReturnToOrigin()
+        {
+        transform.DOShakePosition(0.3f, 0.3f, 10, 90, false, true)
+            .OnComplete(() =>
+         {
+        transform.DOMove(originalPosition, 0.5f).SetEase(Ease.OutQuad);
+          });
+         }
+
+        Vector3 GetMouseWorldPosition()
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition.z = Mathf.Abs(mainCamera.transform.position.z); 
+            return mainCamera.ScreenToWorldPoint(mousePosition);
+        }
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = mainCamera.WorldToScreenPoint(transform.position).z; // 保持物体的世界Z坐标
-        return mainCamera.ScreenToWorldPoint(mousePosition);
+        if (other.CompareTag("SnapZone"))
+        {
+            isInSnapZone = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("SnapZone"))
+        {
+            isInSnapZone = false;
+        }
     }
 }
+
+
+
+
