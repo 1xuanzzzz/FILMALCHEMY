@@ -114,6 +114,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -284,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lightbulb_on_0: -2679092192409795410
+      Lightbulb_on_1: -7808399875071185106
+      Lightbulb_on_2: 1048074227485568419
+      Lightbulb_on_3: 2607678966262685219
+      Lightbulb_on_4: 1753164437663265297
+      Lightbulb_on_5: 6502522503402503350
+      Lightbulb_on_6: -7450944801594650597
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
