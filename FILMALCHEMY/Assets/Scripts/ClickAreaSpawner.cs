@@ -7,7 +7,7 @@ public class ClickAreaSpawner : MonoBehaviour
     public float showDuration = 3f;
 
     [Header("显影控制器")]
-    public PhotoDevelopController photoDevelopController;  // 拖入你的显影控制器对象
+    public PhotoDevelopController photoDevelopController;
 
     private Camera mainCamera;
     private bool hasClicked = false;
@@ -23,7 +23,6 @@ public class ClickAreaSpawner : MonoBehaviour
 
     void Update()
     {
-        // Step 0：点击后显示提示物体
         if (Input.GetMouseButtonDown(0) && !hasClicked && step == 0)
         {
             Vector2 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -36,8 +35,6 @@ public class ClickAreaSpawner : MonoBehaviour
                 StartCoroutine(ShowAndNextStep());
             }
         }
-
-        // 其他步骤逻辑可以交由其他控制器处理
     }
 
     System.Collections.IEnumerator ShowAndNextStep()
@@ -56,18 +53,41 @@ public class ClickAreaSpawner : MonoBehaviour
 
     System.Collections.IEnumerator RotateAndNext(Transform target, float angle, float duration, int nextStep)
     {
-        Quaternion startRot = target.rotation;
-        Quaternion endRot = Quaternion.Euler(0, 0, angle);
-        float elapsed = 0f;
+        OriginalTransformRecorder recorder = target.GetComponent<OriginalTransformRecorder>();
+        if (recorder == null)
+        {
+            Debug.LogError("⚠️ 缺少 OriginalTransformRecorder 组件，无法还原 Transform");
+            yield break;
+        }
 
+        Quaternion originalRotation = recorder.OriginalRotation;
+        Vector3 originalPosition = recorder.OriginalPosition;
+
+        Quaternion liftedRotation = originalRotation * Quaternion.Euler(0, 0, angle);
+
+        // ✅ 当前拖后的 position，要保持不动
+        Vector3 currentPosition = target.position;
+
+        // ✅ Step 1：原地旋转动画，位置保持当前
+        float elapsed = 0f;
         while (elapsed < duration)
         {
-            target.rotation = Quaternion.Lerp(startRot, endRot, elapsed / duration);
+            float t = elapsed / duration;
+            target.rotation = Quaternion.Lerp(originalRotation, liftedRotation, t);
+            target.position = currentPosition; // ✅ 不动位置
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        target.rotation = endRot;
+        target.rotation = liftedRotation;
+        target.position = currentPosition;
+
+        // ✅ Step 2：保持当前状态 3 秒
+        yield return new WaitForSeconds(2f);
+
+        // ✅ Step 3：瞬间回到拖动之前的位置和角度
+        target.rotation = originalRotation;
+        target.position = originalPosition;
 
         var drag = target.GetComponent<Draggable>();
         if (drag != null)
@@ -78,8 +98,6 @@ public class ClickAreaSpawner : MonoBehaviour
 
         step = nextStep;
         Debug.Log("进入 Step " + step);
-
-        // ✅ 可在旋转后直接判断是否需要启动显影
         TryStartDevelopmentAtStep(step);
     }
 
@@ -87,14 +105,11 @@ public class ClickAreaSpawner : MonoBehaviour
     {
         Debug.Log("手动跳转 Step " + step + " → " + nextStep);
         step = nextStep;
-
-        // ✅ 当手动跳 step 时也判断是否要触发显影
         TryStartDevelopmentAtStep(step);
     }
 
     private void TryStartDevelopmentAtStep(int currentStep)
     {
-        // 你可以更改这里的数字，比如只有 Step 4 才触发
         if (currentStep == 4 && photoDevelopController != null)
         {
             photoDevelopController.StartDevelopment();

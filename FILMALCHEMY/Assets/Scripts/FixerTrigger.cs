@@ -2,20 +2,24 @@ using UnityEngine;
 
 public class FixerTrigger : MonoBehaviour
 {
-    public Transform fixerBottle;
+    public string requiredTag = "Container";
+    public int requiredStep = 2;
     public ClickAreaSpawner controller;
+
     public float rotateAngle = 30f;
     public float rotateDuration = 1f;
+    public int nextStep = 3;
 
     private bool triggered = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!triggered && other.transform == fixerBottle && controller.CurrentStep() == 2)
+        if (triggered) return;
+
+        if (other.CompareTag(requiredTag) && controller != null && controller.CurrentStep() == requiredStep)
         {
             triggered = true;
-            Debug.Log("Fixer 进入触发区域！");
-            controller.TriggerRotation(fixerBottle, rotateAngle, rotateDuration, 3);
+            controller.TriggerRotation(other.transform, rotateAngle, rotateDuration, nextStep);
         }
     }
 }
