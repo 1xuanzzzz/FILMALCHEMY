@@ -18,8 +18,8 @@ public class SceneFlowController : MonoBehaviour
             objectToShow.SetActive(true);
 
         Debug.Log($"⏳ 等待 {delay} 秒后切换场景：{sceneName}");
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(0);
 
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
     }
 }

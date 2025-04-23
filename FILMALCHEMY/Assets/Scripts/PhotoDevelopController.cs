@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class PhotoDevelopController : MonoBehaviour
 {
     [Header("显影设置")]
     public GameObject photo;                  // 最终显影后要显示的照片
-    public float developTime = 60f;           // 显影时间（秒）
+    public float simulationTime = 60f;           // 显影时间（秒）
+    public float realDevelopTime = 5f;
+    public string startTimerText;
 
     [Header("UI显示")]
     public TextMeshProUGUI timerText;         // 正计时文本（00:00:00）
@@ -27,7 +30,7 @@ public class PhotoDevelopController : MonoBehaviour
         timer = 0f;
 
         if (timerText != null)
-            timerText.text = "00:00:00";
+            timerText.text = startTimerText;
     }
 
     void Update()
@@ -37,9 +40,11 @@ public class PhotoDevelopController : MonoBehaviour
         timer += Time.deltaTime;
         UpdateTimerUI();
 
-        if (timer >= developTime)
+        if (timer >= realDevelopTime)
         {
             CompleteDevelopment();
+            TriggerShakeAnimation();
+            timerText.text = "00:00:00";
             isDeveloping = false;
         }
     }
@@ -82,11 +87,32 @@ public class PhotoDevelopController : MonoBehaviour
     {
         if (timerText != null)
         {
-            float clampedTime = Mathf.Min(timer, developTime);
-            int hours = Mathf.FloorToInt(clampedTime / 3600);
-            int minutes = Mathf.FloorToInt((clampedTime % 3600) / 60);
-            int seconds = Mathf.FloorToInt(clampedTime % 60);
+            // float clampedTime = Mathf.Min(timer, simulationTime);
+            float timeLeft = (realDevelopTime - timer) * (simulationTime/realDevelopTime);
+            int hours = Mathf.FloorToInt(timeLeft / 3600);
+            int minutes = Mathf.FloorToInt((timeLeft % 3600) / 60);
+            int seconds = Mathf.FloorToInt(timeLeft % 60);
             timerText.text = string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
         }
+    }
+
+
+    void TriggerShakeAnimation()
+    {
+        float duration = 3.0f; // 震动持续时间（秒）
+        float strengthX = 10f; // X轴震动强度（单位是UI像素）
+        int vibrato = 20;      // 震动次数
+        float randomness = 0f; // 设为0表示只沿一个方向震动（X轴）
+
+        RectTransform rect = timerText.rectTransform;
+        rect.DOKill(); // 取消之前的Tween，避免冲突
+
+        rect.DOShakePosition(duration,
+                             new Vector3(strengthX, 0f, 0f),
+                             vibrato,
+                             randomness,
+                             snapping: false,
+                             fadeOut: true)
+            .SetEase(Ease.Linear);
     }
 }
