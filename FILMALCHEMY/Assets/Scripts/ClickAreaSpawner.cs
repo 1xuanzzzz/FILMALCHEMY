@@ -42,7 +42,7 @@ public class ClickAreaSpawner : MonoBehaviour
         objectToShow.SetActive(true);
         yield return new WaitForSeconds(showDuration);
         objectToShow.SetActive(false);
-        step = 1;
+        step = 2;
         Debug.Log("进入 Step 1");
     }
 

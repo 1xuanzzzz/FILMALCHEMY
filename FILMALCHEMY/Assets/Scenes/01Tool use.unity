@@ -1255,7 +1255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photo: {fileID: 711707192}
-  developTime: 60
+  simulationTime: 60
+  realDevelopTime: 5
+  startTimerText: 
   timerText: {fileID: 180195494}
   clickAreaSpawner: {fileID: 1654921108}
   dragOutController: {fileID: 0}
@@ -1640,11 +1642,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredTag: Bottle
-  requiredStep: 1
+  requiredStep: 0
   controller: {fileID: 1654921108}
   rotateAngle: 30
   rotateDuration: 1
-  nextStep: 2
+  nextStep: 1
 --- !u!50 &546637556
 Rigidbody2D:
   serializedVersion: 5
@@ -1702,7 +1704,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -3282,7 +3284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d985ad4bc5fb44cb908bbd6cf953dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredStep: 1
+  requiredStep: 0
   controller: {fileID: 1654921108}
 --- !u!114 &1074977880
 MonoBehaviour:
@@ -4169,6 +4171,7 @@ MonoBehaviour:
   objectToShow: {fileID: 619473773}
   showDuration: 3
   photoDevelopController: {fileID: 466719858}
+  step: 0
 --- !u!60 &1654921109
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4767,6 +4770,7 @@ MonoBehaviour:
   rotateAngle: -45
   rotateDuration: 1
   nextStep: 3
+  RangeCollider: {fileID: 1685458803}
 --- !u!1 &1708834985
 GameObject:
   m_ObjectHideFlags: 0
@@ -5417,6 +5421,7 @@ MonoBehaviour:
   objectToShow: {fileID: 427735007}
   showDuration: 3
   photoDevelopController: {fileID: 0}
+  step: 0
 --- !u!212 &1928751549
 SpriteRenderer:
   m_ObjectHideFlags: 0

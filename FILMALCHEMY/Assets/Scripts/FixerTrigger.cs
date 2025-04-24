@@ -9,7 +9,7 @@ public class FixerTrigger : MonoBehaviour
     public float rotateAngle = 30f;
     public float rotateDuration = 1f;
     public int nextStep = 3;
-
+    public Collider2D RangeCollider;
     private bool triggered = false;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -20,6 +20,7 @@ public class FixerTrigger : MonoBehaviour
         {
             triggered = true;
             controller.TriggerRotation(other.transform, rotateAngle, rotateDuration, nextStep);
+            RangeCollider.gameObject.SetActive(false);
         }
     }
 }
