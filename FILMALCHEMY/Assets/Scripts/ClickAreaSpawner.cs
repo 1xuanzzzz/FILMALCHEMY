@@ -11,7 +11,7 @@ public class ClickAreaSpawner : MonoBehaviour
 
     private Camera mainCamera;
     private bool hasClicked = false;
-    private int step = 0;
+    public int step = 0;
 
     void Start()
     {
@@ -23,7 +23,7 @@ public class ClickAreaSpawner : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !hasClicked && step == 0)
+        if (Input.GetMouseButtonDown(0) && !hasClicked && step == 1)
         {
             Vector2 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);

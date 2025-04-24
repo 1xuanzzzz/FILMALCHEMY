@@ -3,12 +3,12 @@ using UnityEngine;
 public class DeveloperTrigger : MonoBehaviour
 {
     public string requiredTag = "Bottle";
-    public int requiredStep = 1;
+    public int requiredStep = 0;
     public ClickAreaSpawner controller;
 
     public float rotateAngle = 30f;
     public float rotateDuration = 1f;
-    public int nextStep = 2;
+    public int nextStep = 1;
 
     private bool triggered = false;
 
@@ -20,6 +20,7 @@ public class DeveloperTrigger : MonoBehaviour
         {
             triggered = true;
             controller.TriggerRotation(other.transform, rotateAngle, rotateDuration, nextStep);
+            Debug.LogError("yes");
         }
     }
 }
