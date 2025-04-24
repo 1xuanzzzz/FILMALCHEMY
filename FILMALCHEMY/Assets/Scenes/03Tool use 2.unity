@@ -1011,7 +1011,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.022645, y: 0.031578, z: -4050}
-  m_LocalScale: {x: 65.197365, y: 28.222029, z: 3.1628754}
+  m_LocalScale: {x: 29.33, y: 30.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1410661953}
@@ -1060,7 +1060,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 6085534903743491803, guid: 0c1c6fdf5f707574bae03bd0630263dc, type: 3}
+  m_Sprite: {fileID: 6085534903743491803, guid: d3c03458dd4a0cf438c868b135173144, type: 3}
   m_Color: {r: 0.20784314, g: 0.21176471, b: 0.22745098, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1255,7 +1255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photo: {fileID: 711707192}
-  developTime: 30
+  simulationTime: 30
+  realDevelopTime: 5
+  startTimerText: 00:00:30
   timerText: {fileID: 180195494}
   clickAreaSpawner: {fileID: 1654921108}
   dragOutController: {fileID: 0}
@@ -1640,11 +1642,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredTag: Bottle
-  requiredStep: 1
+  requiredStep: 0
   controller: {fileID: 1654921108}
   rotateAngle: 30
   rotateDuration: 1
-  nextStep: 2
+  nextStep: 1
 --- !u!50 &546637556
 Rigidbody2D:
   serializedVersion: 5
@@ -3282,7 +3284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d985ad4bc5fb44cb908bbd6cf953dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredStep: 1
+  requiredStep: 0
   controller: {fileID: 0}
 --- !u!60 &1074977879
 PolygonCollider2D:
@@ -3843,14 +3845,14 @@ RectTransform:
   m_GameObject: {fileID: 1571709678}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9998999, y: 0.9998999, z: 0.9998999}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1410661953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -373, y: 199}
+  m_AnchoredPosition: {x: -373, y: 201}
   m_SizeDelta: {x: 25.36, y: 27.97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1622413869
@@ -4021,7 +4023,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4169,6 +4171,7 @@ MonoBehaviour:
   objectToShow: {fileID: 619473773}
   showDuration: 3
   photoDevelopController: {fileID: 466719858}
+  step: 0
 --- !u!60 &1654921109
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4767,6 +4770,7 @@ MonoBehaviour:
   rotateAngle: -45
   rotateDuration: 1
   nextStep: 3
+  RangeCollider: {fileID: 1685458803}
 --- !u!1 &1708834985
 GameObject:
   m_ObjectHideFlags: 0
@@ -5417,6 +5421,7 @@ MonoBehaviour:
   objectToShow: {fileID: 427735007}
   showDuration: 3
   photoDevelopController: {fileID: 0}
+  step: 0
 --- !u!212 &1928751549
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5745,9 +5750,9 @@ Transform:
   m_GameObject: {fileID: 2105982260}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.280001, y: -4.27, z: 0}
-  m_LocalScale: {x: 0.5496286, y: 0.5496286, z: 0.5496286}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 8.81, y: -4.46, z: 0}
+  m_LocalScale: {x: 0.46, y: 0.46, z: 0.46}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1814144435}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

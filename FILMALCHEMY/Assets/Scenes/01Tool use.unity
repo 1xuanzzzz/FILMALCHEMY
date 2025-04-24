@@ -1257,7 +1257,7 @@ MonoBehaviour:
   photo: {fileID: 711707192}
   simulationTime: 60
   realDevelopTime: 5
-  startTimerText: 
+  startTimerText: 00:01:00
   timerText: {fileID: 180195494}
   clickAreaSpawner: {fileID: 1654921108}
   dragOutController: {fileID: 0}

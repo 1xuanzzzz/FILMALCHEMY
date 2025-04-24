@@ -38,6 +38,8 @@ public class DryingZoneTrigger : MonoBehaviour
 
             // 进入下一阶段
             controller.TriggerNextStep(nextStep);
+
+            this.gameObject.SetActive(false);
         }
     }
 }
