@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FixerTrigger : MonoBehaviour
@@ -12,6 +13,8 @@ public class FixerTrigger : MonoBehaviour
     public Collider2D RangeCollider;
     private bool triggered = false;
 
+    public static Action startPouring;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (triggered) return;
@@ -21,6 +24,11 @@ public class FixerTrigger : MonoBehaviour
             triggered = true;
             controller.TriggerRotation(other.transform, rotateAngle, rotateDuration, nextStep);
             RangeCollider.gameObject.SetActive(false);
+            if (requiredStep == 2) 
+            {
+                startPouring?.Invoke();
+                Debug.Log("start Pouring");
+            }
         }
     }
 }

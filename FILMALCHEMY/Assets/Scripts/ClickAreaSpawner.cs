@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ClickAreaSpawner : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class ClickAreaSpawner : MonoBehaviour
 
     [Header("显影控制器")]
     public PhotoDevelopController photoDevelopController;
+
+    //public GameObject bottle;
+    //public Animator bottleWaterAnimator;
+    public static Action<int> StartWaterPouring;
+    public static Action<int> EndWaterPouring;
 
     private Camera mainCamera;
     private bool hasClicked = false;
@@ -70,6 +76,7 @@ public class ClickAreaSpawner : MonoBehaviour
 
         // ✅ Step 1：原地旋转动画，位置保持当前
         float elapsed = 0f;
+
         while (elapsed < duration)
         {
             float t = elapsed / duration;
@@ -82,8 +89,19 @@ public class ClickAreaSpawner : MonoBehaviour
         target.rotation = liftedRotation;
         target.position = currentPosition;
 
+        // add water pouring anim
+        //bottleWaterAnimator.Play("water_pouring");
+        //bottleWaterAnimator.gameObject.transform.parent = null;
+        //bottleWaterAnimator.gameObject.transform.rotation = Quaternion.identity;
         // ✅ Step 2：保持当前状态 3 秒
-        yield return new WaitForSeconds(2f);
+        StartWaterPouring?.Invoke(nextStep);
+
+        yield return new WaitForSeconds(3f);
+        EndWaterPouring?.Invoke(nextStep);
+
+        //bottleWaterAnimator.Play("default");
+        //bottleWaterAnimator.gameObject.transform.parent = bottle.transform;
+
 
         // ✅ Step 3：瞬间回到拖动之前的位置和角度
         target.rotation = originalRotation;

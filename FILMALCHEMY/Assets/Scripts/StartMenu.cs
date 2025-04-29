@@ -14,6 +14,12 @@ public class StartMenu : MonoBehaviour
     public TextMeshProUGUI TitleText; //标题文字
     public TextMeshProUGUI TitleUnderlay; //文字背景
     public RectTransform ChangeModeDot;
+    public Image button01;
+    public Image button02;
+    public Image button03;
+    public Image SwitchButtonOutline;
+    public Image SwitchButton;
+
 
     [Header("Light Mode Colors")]
     public Color lightModeColor;
@@ -24,6 +30,8 @@ public class StartMenu : MonoBehaviour
     public Color darkModeColor;
     public Color darkUnderlayColor = new Color(0.75f, 0.02f, 0.02f, 1); //#BF0404
     public Color darkTextColor = new Color(0xF2 / 255f, 0xAC / 255f, 0xAC / 255f); //DarkMode 颜色 #F2ACAC
+
+    public Color middleColor;
     
     private ModeTypes myMode;
 
@@ -49,9 +57,31 @@ public class StartMenu : MonoBehaviour
             DOTween.Sequence()
                 .Append(Background.DOColor(darkModeColor, 0.5f).SetEase(Ease.InOutElastic))
                 .Join(TitleText.DOColor(darkTextColor, 0.5f).SetEase(Ease.InOutElastic))
-                .Join(ChangeModeDot.DOLocalMoveX(750, 0.5f))
-                .Append(TitleUnderlay.DOColor(darkUnderlayColor, 0.1f))
-              
+                .Join(ChangeModeDot.DOLocalMoveX(790, 0.5f)) // circle pos
+                .Join
+                (DOTween.Sequence()
+                        .Append(TitleUnderlay.DOColor(middleColor, 0.1f))
+                        .Append(TitleUnderlay.DOColor(darkUnderlayColor, 0.1f)))
+                .Join
+                (DOTween.Sequence()
+                        .Append(button01.DOColor(middleColor, 0.1f))
+                        .Append(button01.DOColor(darkUnderlayColor, 0.1f)))
+                .Join
+                (DOTween.Sequence()
+                        .Append(button02.DOColor(middleColor, 0.1f))
+                        .Append(button02.DOColor(darkUnderlayColor, 0.1f)))
+                .Join
+                (DOTween.Sequence()
+                        .Append(button03.DOColor(middleColor, 0.1f))
+                        .Append(button03.DOColor(darkUnderlayColor, 0.1f)))
+                .Join
+                (DOTween.Sequence()
+                        .Append(SwitchButtonOutline.DOColor(middleColor, 0.1f))
+                        .Append(SwitchButtonOutline.DOColor(darkUnderlayColor, 0.1f)))
+                .Join
+                (DOTween.Sequence()
+                        .Append(SwitchButton.DOColor(middleColor, 0.1f))
+                        .Append(SwitchButton.DOColor(darkUnderlayColor, 0.1f)))
                 .WaitForCompletion();
 
         }
@@ -62,8 +92,31 @@ public class StartMenu : MonoBehaviour
             DOTween.Sequence()
                 .Append(Background.DOColor(lightModeColor, 0.5f).SetEase(Ease.InOutElastic))
                 .Join(TitleText.DOColor(lightTextColor, 0.5f).SetEase(Ease.InOutElastic))
-                .Join(ChangeModeDot.DOLocalMoveX(700, 0.5f))
-                .Append(TitleUnderlay.DOColor(lightUnderlayColor, 0.1f))
+                .Join(ChangeModeDot.DOLocalMoveX(700, 0.5f)) // circle pos
+                .Join
+                (DOTween.Sequence()
+                        .Append(TitleUnderlay.DOColor(middleColor, 0.1f))
+                        .Append(TitleUnderlay.DOColor(lightUnderlayColor, 0.1f)))
+                .Join
+                (DOTween.Sequence()
+                        .Append(button01.DOColor(middleColor, 0.1f))
+                        .Append(button01.DOColor(lightUnderlayColor, 0.1f)))
+                .Join
+                (DOTween.Sequence()
+                        .Append(button02.DOColor(middleColor, 0.1f))
+                        .Append(button02.DOColor(lightUnderlayColor, 0.1f)))
+                .Join
+                (DOTween.Sequence()
+                        .Append(button03.DOColor(middleColor, 0.1f))
+                        .Append(button03.DOColor(lightUnderlayColor, 0.1f)))
+                .Join
+                (DOTween.Sequence()
+                        .Append(SwitchButtonOutline.DOColor(middleColor, 0.1f))
+                        .Append(SwitchButtonOutline.DOColor(lightUnderlayColor, 0.1f)))
+                .Join
+                (DOTween.Sequence()
+                        .Append(SwitchButton.DOColor(middleColor, 0.1f))
+                        .Append(SwitchButton.DOColor(lightUnderlayColor, 0.1f)))
                 .WaitForCompletion();
 
         }
