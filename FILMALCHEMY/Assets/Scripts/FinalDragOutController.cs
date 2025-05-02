@@ -37,7 +37,7 @@ public class FinalDragOutController : MonoBehaviour
         }
     }
 
-    System.Collections.IEnumerator HandleSuccess()
+    public System.Collections.IEnumerator HandleSuccess()
     {
         // 隐藏旧物体
         if (objectToHide != null)

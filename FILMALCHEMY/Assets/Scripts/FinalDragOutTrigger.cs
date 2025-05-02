@@ -45,4 +45,22 @@ public class FinalDragOutTrigger : MonoBehaviour
             }
         }
     }
+
+
+
+    public System.Collections.IEnumerator HandleSuccess()
+    {
+        // 隐藏旧物体
+        if (objectToHide != null)
+            objectToHide.SetActive(false);
+
+        // 显示新物体
+        if (objectToShow != null)
+            objectToShow.SetActive(true);
+
+        Debug.Log("5秒后跳转场景：" + nextSceneName);
+        yield return new WaitForSeconds(delayBeforeSceneLoad);
+
+        SceneManager.LoadScene(nextSceneName);
+    }
 }

@@ -17,6 +17,8 @@ public class PhotoDevelopController : MonoBehaviour
     public ClickAreaSpawner clickAreaSpawner;
     public FinalDragOutController dragOutController;  // 拖出控制器（显影完成后启动）
 
+    public Animator myTakeOutAnimator;
+
     private bool isDeveloping = false;
     private bool hasStarted = false;
     private float timer = 0f;
@@ -70,17 +72,21 @@ public class PhotoDevelopController : MonoBehaviour
         if (photo != null)
             photo.SetActive(true);
 
-        // ✅ 通知进入下一个 Step
-        if (clickAreaSpawner != null)
-        {
-            clickAreaSpawner.TriggerNextStep(6); // 进入拖出阶段
-        }
 
-        // ✅ 启用拖拽阶段控制器
-        if (dragOutController != null)
-        {
-            dragOutController.enabled = true;
-        }
+        // play take out animation
+        myTakeOutAnimator.Play("TakeoutAnimate");
+
+        //// ✅ 通知进入下一个 Step
+        //if (clickAreaSpawner != null)
+        //{
+        //    clickAreaSpawner.TriggerNextStep(6); // 进入拖出阶段
+        //}
+
+        //// ✅ 启用拖拽阶段控制器
+        //if (dragOutController != null)
+        //{
+        //    dragOutController.enabled = true;
+        //}
     }
 
     void UpdateTimerUI()
